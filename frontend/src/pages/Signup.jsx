@@ -7,7 +7,7 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    fullname: "",
+    fullName: "",
     email: "",
     password: "",
   });
@@ -27,9 +27,9 @@ const Signup = () => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    const {fullname, email, password} = formData;
+    const {fullName, email, password} = formData;
 
-    if (!fullname || !email || !password) {
+    if (!fullName || !email || !password) {
       toast.error("All fields are required.");
       return;
     }
@@ -76,14 +76,14 @@ const Signup = () => {
 
         <form onSubmit={submitHandler} className="space-y-4">
           <div>
-            <label htmlFor="fullname" className="block font-medium">
+            <label htmlFor="fullName" className="block font-medium">
               Full Name
             </label>
             <input
               type="text"
-              id="fullname"
-              name="fullname"
-              value={formData.fullname}
+              id="fullName"
+              name="fullName"
+              value={formData.fullName}
               onChange={handleChange}
               className="mt-1 w-full px-4 py-2 border rounded-md"
               required
