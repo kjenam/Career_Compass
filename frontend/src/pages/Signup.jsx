@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
-import {toast} from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ const Signup = () => {
   });
 
   const handleChange = (event) => {
-    const {name, value} = event.target;
+    const { name, value } = event.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -27,7 +27,7 @@ const Signup = () => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    const {fullName, email, password} = formData;
+    const { fullName, email, password } = formData;
 
     if (!fullName || !email || !password) {
       toast.error("All fields are required.");
@@ -48,9 +48,9 @@ const Signup = () => {
 
     try {
       const signup = await axios.post(
-        "http://localhost:8000/api/auth/signup",
+        "https://career-compass-3cg1.onrender.com/api/auth/signup", // <-- FIXED URL
         formData,
-        {withCredentials: true}
+        { withCredentials: true }
       );
 
       if (signup.status === 200) {

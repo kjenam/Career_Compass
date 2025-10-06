@@ -40,8 +40,8 @@ const AddOrEditApplicationModal = ({
 
     try {
       const url = selectedApp
-        ? `http://localhost:8000/api/applications/${selectedApp._id}`
-        : "http://localhost:8000/api/applications";
+        ? `https://career-compass-3cg1.onrender.com/api/applications/${selectedApp._id}`
+        : "https://career-compass-3cg1.onrender.com/api/applications";
       const method = selectedApp ? "PUT" : "POST";
 
       const res = await fetch(url, {

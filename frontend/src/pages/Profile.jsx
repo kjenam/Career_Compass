@@ -21,7 +21,7 @@ export default function Profile() {
   const fetchProfile = async () => {
     try {
       setLoadingProfile(true);
-      const response = await axios.get("http://localhost:8000/api/profile", {
+      const response = await axios.get("https://career-compass-3cg1.onrender.com/api/profile", {
         withCredentials: true,
       });
       setProfile({
@@ -39,7 +39,7 @@ export default function Profile() {
   const handleSaveProfile = async (updatedProfile) => {
     try {
       setSavingProfile(true);
-      await axios.put("http://localhost:8000/api/profile", updatedProfile, {
+      await axios.put("https://career-compass-3cg1.onrender.com/api/profile", updatedProfile, {
         withCredentials: true,
       });
 
@@ -61,7 +61,7 @@ export default function Profile() {
     try {
       setChangingPassword(true);
       await axios.post(
-        "http://localhost:8000/api/change-password",
+        "https://career-compass-3cg1.onrender.com/api/change-password",
         passwordData,
         {withCredentials: true}
       );

@@ -20,7 +20,7 @@ export default function JDGuidance() {
       formData.append("resume", file);
       formData.append("jobDescription", jobDescription);
 
-      const response = await fetch("http://localhost:8000/api/analysis/jd", {
+      const response = await fetch("https://career-compass-3cg1.onrender.com/api/analysis/jd", {
         method: "POST",
         body: formData,
       });

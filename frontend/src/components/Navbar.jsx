@@ -18,7 +18,7 @@ export const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/auth/logout", {
+      const response = await fetch("https://career-compass-3cg1.onrender.com/api/auth/logout", {
         method: "POST",
         credentials: "include",
       });

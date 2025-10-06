@@ -13,7 +13,7 @@ const ConfirmDeleteModal = ({
 
   const onConfirmDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8000/api/applications/${id}`, {
+      await axios.delete(`https://career-compass-3cg1.onrender.com/api/applications/${id}`, {
         withCredentials: true,
       });
       setShowDeleteModal(false);
