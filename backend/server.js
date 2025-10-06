@@ -19,10 +19,10 @@ connectDB();
 const app = express();
 
 // CORS settings to support frontend on localhost:3000
-
+const url = process.env.FRONTEND_URL || 8000;
 app.use(
   cors({
-    origin: "https://career-compass-1-3ikt.onrender.com", // React frontend
+    origin: url, // React frontend
     credentials: true, // Allow sending cookies
   })
 );
