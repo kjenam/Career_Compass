@@ -21,7 +21,7 @@ const app = express();
 // CORS settings to support frontend on localhost:3000
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://career-compass-frontend.onrender.com", // Replace with your actual frontend URL
+  "https://career-compass-1-3ikt.onrender.com", // Replace with your actual frontend URL
 ];
 app.use(
   cors({
