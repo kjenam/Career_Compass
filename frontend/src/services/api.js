@@ -1,7 +1,10 @@
 import axios from "axios";
-
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://career-compass-3cg1.onrender.com/", // Replace with your actual frontend URL
+];
 const api = axios.create({
-  baseURL: "http://localhost:8000/api",
+  baseURL: allowedOrigins,
   withCredentials: true, // ⬅️ crucial for cookies
 });
 
