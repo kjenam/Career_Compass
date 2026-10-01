@@ -18,11 +18,23 @@ connectDB();
 
 const app = express();
 
-// CORS settings to support frontend on localhost:3000
-const url = process.env.FRONTEND_URL || 8000;
+// CORS settings — allow both local dev and deployed frontend
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  "http://localhost:3000",
+  "http://localhost:5173",
+].filter(Boolean); // remove undefined entries
+
 app.use(
   cors({
-    origin: url, // React frontend
+    origin: (origin, callback) => {
+      // Allow requests with no origin (e.g. curl, Postman)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error(`CORS blocked: ${origin}`));
+      }
+    },
     credentials: true, // Allow sending cookies
   })
 );

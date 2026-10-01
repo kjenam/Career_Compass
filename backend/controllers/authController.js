@@ -3,10 +3,14 @@ import User from "../models/User.js";
 import generateToken from "../utils/generateToken.js";
 import jwt from "jsonwebtoken";
 
+const isProduction = process.env.NODE_ENV === "production";
+
 const cookieOptions = {
   httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  sameSite: "Strict",
+  secure: isProduction,
+  // "None" is required for cross-origin cookie sending (Vercel → Render).
+  // "Lax" is safe for same-domain local dev.
+  sameSite: isProduction ? "None" : "Lax",
   maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
 };
 
@@ -54,6 +58,6 @@ export const verify = async (req, res) => {
 };
 
 export const logout = (req, res) => {
-  res.clearCookie("token", {httpOnly: true, sameSite: "Strict"});
+  res.clearCookie("token", cookieOptions);
   res.json({message: "Logged out successfully"});
 };
