@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {UploadCard} from "../components/UploadCard";
 import {FeedbackCard} from "../components/FeedbackCard";
+import api from "../services/api";
 
 export default function ResumeReview() {
   const [file, setFile] = useState(null);
@@ -17,12 +18,11 @@ export default function ResumeReview() {
       const formData = new FormData();
       formData.append("resume", file);
 
-      const response = await fetch(`http://localhost:8000/api/analysis/jd`, {
-        method: "POST",
-        body: formData,
+      const response = await api.post(`/api/analysis/jd`, formData, {
+        headers: {"Content-Type": "multipart/form-data"},
       });
 
-      const data = await response.json();
+      const data = response.data;
       setFeedback(data.feedback); // Assumes {feedback: "..."} from backend
     } catch (error) {
       console.error("Error analyzing resume:", error);

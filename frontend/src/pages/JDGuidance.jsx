@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {JobFitUploadCard} from "../components/JobFitUploadCard";
 import {JobFitFeedbackCard} from "../components/JobFitFeedbackCard";
+import api from "../services/api";
 
 export default function JDGuidance() {
   const [file, setFile] = useState(null);
@@ -20,12 +21,11 @@ export default function JDGuidance() {
       formData.append("resume", file);
       formData.append("jobDescription", jobDescription);
 
-      const response = await fetch(`http://localhost:8000/api/analysis/jd`, {
-        method: "POST",
-        body: formData,
+      const response = await api.post(`/api/analysis/jd`, formData, {
+        headers: {"Content-Type": "multipart/form-data"},
       });
 
-      const data = await response.json();
+      const data = response.data;
       setFeedback(data.feedback); // suppose backend returns {feedback: "..."}
     } catch (error) {
       console.error("Error analyzing fit:", error);

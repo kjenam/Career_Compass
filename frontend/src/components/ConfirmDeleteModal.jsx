@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import api from "../services/api";
 import {toast} from "react-hot-toast";
 
 const ConfirmDeleteModal = ({
@@ -13,9 +13,7 @@ const ConfirmDeleteModal = ({
 
   const onConfirmDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8000/api/applications/${id}`, {
-        withCredentials: true,
-      });
+      await api.delete(`/api/applications/${id}`);
       setShowDeleteModal(false);
       refreshApplications();
       if (showToast) showToast("Application deleted successfully");

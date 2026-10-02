@@ -3,7 +3,7 @@ import {FiSearch} from "react-icons/fi";
 import ApplicationCard from "../components/ApplicationCard";
 import AddOrEditApplicationModal from "../components/AddOrEditApplicationModal";
 import ConfirmDeleteModal from "../components/ConfirmDeleteModal";
-import axios from "axios";
+import api from "../services/api";
 import {toast} from "react-hot-toast";
 
 const Dashboard = () => {
@@ -22,9 +22,8 @@ const Dashboard = () => {
       if (status) query.append("status", status);
       if (sortOrder) query.append("sort", sortOrder);
 
-      const response = await axios.get(
-        `http://localhost:8000/api/applications?${query.toString()}`,
-        {withCredentials: true}
+      const response = await api.get(
+        `/api/applications?${query.toString()}`
       );
 
       setApplications(response.data);

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../services/api";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 
@@ -47,12 +47,7 @@ const Signup = () => {
     }
 
     try {
-      console.log(process.env.NEXT_PUBLIC_BACKEND_URL);
-      const signup = await axios.post(
-        `http://localhost:8000/api/auth/signup`, 
-        formData,
-        { withCredentials: true }
-      );
+      const signup = await api.post(`/api/auth/signup`, formData);
 
       if (signup.status === 200) {
         toast.success("Signup successful!");

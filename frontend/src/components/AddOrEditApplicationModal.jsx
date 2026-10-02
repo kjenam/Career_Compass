@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {toast} from "react-hot-toast";
+import api from "../services/api";
 
 const AddOrEditApplicationModal = ({
   show,
@@ -39,19 +40,14 @@ const AddOrEditApplicationModal = ({
     }
 
     try {
-      const url = selectedApp
-        ? `http://localhost:8000/api/applications/${selectedApp._id}`
-        : `http://localhost:8000/api/applications`;
-      const method = selectedApp ? "PUT" : "POST";
+      const endpoint = selectedApp
+        ? `/api/applications/${selectedApp._id}`
+        : `/api/applications`;
+      const method = selectedApp ? "put" : "post";
 
-      const res = await fetch(url, {
-        method,
-        headers: {"Content-Type": "application/json"},
-        credentials: "include",
-        body: JSON.stringify(form),
-      });
+      const res = await api[method](endpoint, form);
 
-      if (res.ok) {
+      if (res.status === 200 || res.status === 201) {
         toast.success(
           `Application ${selectedApp ? "updated" : "added"} successfully!`
         );

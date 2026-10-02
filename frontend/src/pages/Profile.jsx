@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import axios from "axios";
+import api from "../services/api";
 import {toast} from "react-hot-toast"; // ✅ Import toast
 import {ProfileInformationCard} from "../components/ProfileInformationCard";
 import {ChangePasswordCard} from "../components/ChangePasswordCard";
@@ -21,9 +21,7 @@ export default function Profile() {
   const fetchProfile = async () => {
     try {
       setLoadingProfile(true);
-      const response = await axios.get(`http://localhost:8000/api/profile`, {
-        withCredentials: true,
-      });
+      const response = await api.get(`/api/profile`);
       setProfile({
         fullName: response.data.fullName,
         email: response.data.email,
@@ -39,9 +37,7 @@ export default function Profile() {
   const handleSaveProfile = async (updatedProfile) => {
     try {
       setSavingProfile(true);
-      await axios.put(`http://localhost:8000/api/profile`, updatedProfile, {
-        withCredentials: true,
-      });
+      await api.put(`/api/profile`, updatedProfile);
 
       setProfile((prev) => ({
         ...prev,
@@ -60,11 +56,7 @@ export default function Profile() {
   const handleChangePassword = async (passwordData) => {
     try {
       setChangingPassword(true);
-      await axios.post(
-        `http://localhost:8000/api/change-password`,
-        passwordData,
-        {withCredentials: true}
-      );
+      await api.post(`/api/change-password`, passwordData);
 
       toast.success("Password changed successfully 🔐"); // ✅ Toast
     } catch (error) {

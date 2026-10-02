@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import axios from "axios";
+import api from "../services/api";
 import {useNavigate} from "react-router-dom";
 import {useAuth} from "../context/AuthContext";
 import {toast} from "react-hot-toast";
@@ -38,11 +38,7 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post(
-        `http://localhost:8000/api/auth/login`,
-        formData,
-        {withCredentials: true}
-      );
+      const response = await api.post(`/api/auth/login`, formData);
 
       if (response.status === 200) {
         toast.success("Login successful!");
