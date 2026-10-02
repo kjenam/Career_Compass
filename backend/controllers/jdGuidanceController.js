@@ -46,6 +46,7 @@ export const jdGuidance = async (req, res) => {
     // Clean up uploaded file
     fs.unlinkSync(filePath);
 
+
     const prompt = `
     You are a professional resume reviewer.
     
@@ -81,10 +82,11 @@ export const jdGuidance = async (req, res) => {
     // Call OpenRouter API
     let openRouterResponse;
     try {
+
       openRouterResponse = await axios.post(
         "https://openrouter.ai/api/v1/chat/completions",
         {
-          model: "deepseek/deepseek-r1-0528:free",
+          model: "x-ai/grok-4.1-fast:free",
           messages: [
             {
               role: "user",
@@ -100,6 +102,7 @@ export const jdGuidance = async (req, res) => {
           timeout: 20000,
         }
       );
+      
     } catch (apiErr) {
       return res.status(500).json({
         message: "OpenRouter API call failed.",

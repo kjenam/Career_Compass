@@ -23,7 +23,7 @@ const Dashboard = () => {
       if (sortOrder) query.append("sort", sortOrder);
 
       const response = await axios.get(
-        `https://career-compass-3cg1.onrender.com/api/applications?${query.toString()}`,
+        `http://localhost:8000/api/applications?${query.toString()}`,
         {withCredentials: true}
       );
 

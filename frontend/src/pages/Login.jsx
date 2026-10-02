@@ -39,7 +39,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "https://career-compass-3cg1.onrender.com/api/auth/login",
+        `http://localhost:8000/api/auth/login`,
         formData,
         {withCredentials: true}
       );

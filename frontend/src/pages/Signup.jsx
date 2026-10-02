@@ -47,8 +47,9 @@ const Signup = () => {
     }
 
     try {
+      console.log(process.env.NEXT_PUBLIC_BACKEND_URL);
       const signup = await axios.post(
-        "https://career-compass-3cg1.onrender.com/api/auth/signup", // <-- FIXED URL
+        `http://localhost:8000/api/auth/signup`, 
         formData,
         { withCredentials: true }
       );

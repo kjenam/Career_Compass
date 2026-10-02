@@ -18,24 +18,26 @@ connectDB();
 
 const app = express();
 
-// CORS settings — allow both local dev and deployed frontend
-const allowedOrigins = [
-  process.env.FRONTEND_URL,
-  "http://localhost:3000",
-  "http://localhost:5173",
-].filter(Boolean); // remove undefined entries
+// CORS — allow localhost, production URL, and all Vercel preview deployments
+const ALLOWED_ORIGIN_REGEX = /^https:\/\/career-compass(-[a-z0-9]+)*(-kjenams-projects)?\.vercel\.app$/;
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (e.g. curl, Postman)
-      if (!origin || allowedOrigins.includes(origin)) {
+      // Allow: no origin (curl/Postman), localhost, or any career-compass vercel URL
+      if (
+        !origin ||
+        origin === process.env.FRONTEND_URL ||
+        /^http:\/\/localhost(:\d+)?$/.test(origin) ||
+        ALLOWED_ORIGIN_REGEX.test(origin)
+      ) {
         callback(null, true);
       } else {
+        console.warn(`CORS blocked origin: ${origin}`);
         callback(new Error(`CORS blocked: ${origin}`));
       }
     },
-    credentials: true, // Allow sending cookies
+    credentials: true, // Required for cookies
   })
 );
 
