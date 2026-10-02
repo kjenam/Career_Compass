@@ -21,9 +21,7 @@ export default function JDGuidance() {
       formData.append("resume", file);
       formData.append("jobDescription", jobDescription);
 
-      const response = await api.post(`/api/analysis/jd`, formData, {
-        headers: {"Content-Type": "multipart/form-data"},
-      });
+      const response = await api.post(`/api/analysis/jd`, formData);
 
       const data = response.data;
       setFeedback(data.feedback); // suppose backend returns {feedback: "..."}

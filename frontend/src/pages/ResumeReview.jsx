@@ -1,6 +1,6 @@
-import React, {useState} from "react";
-import {UploadCard} from "../components/UploadCard";
-import {FeedbackCard} from "../components/FeedbackCard";
+import React, { useState } from "react";
+import { UploadCard } from "../components/UploadCard";
+import { FeedbackCard } from "../components/FeedbackCard";
 import api from "../services/api";
 
 export default function ResumeReview() {
@@ -18,9 +18,7 @@ export default function ResumeReview() {
       const formData = new FormData();
       formData.append("resume", file);
 
-      const response = await api.post(`/api/analysis/jd`, formData, {
-        headers: {"Content-Type": "multipart/form-data"},
-      });
+      const response = await api.post(`/api/analysis/jd`, formData);
 
       const data = response.data;
       setFeedback(data.feedback); // Assumes {feedback: "..."} from backend
