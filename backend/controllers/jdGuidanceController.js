@@ -86,7 +86,7 @@ export const jdGuidance = async (req, res) => {
       openRouterResponse = await axios.post(
         "https://openrouter.ai/api/v1/chat/completions",
         {
-          model: "x-ai/grok-4.1-fast:free",
+          model: "openrouter/free", // auto-routes to best available free model
           messages: [
             {
               role: "user",
